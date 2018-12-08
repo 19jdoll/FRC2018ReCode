@@ -13,19 +13,19 @@ import frc.robot.subsystems.Drivebase;
 
 public class DriveArcadeMode extends Command {
 
-  private OI mOI = OI.getInstance();
   private Drivebase mDrivebase = Drivebase.getInstance();
-
+    OI mOI;
   public DriveArcadeMode() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-
+    
     requires(mDrivebase);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    mOI = OI.getInstance();
     System.out.println("Arcade Mode: Initialize");
   }
 

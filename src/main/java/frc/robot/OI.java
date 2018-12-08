@@ -10,6 +10,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.DriveArcadeMode;
+import frc.robot.commands.DriveTankMode;
+import frc.robot.commands.ReverseIntake;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Drivebase;
 
 /**
@@ -45,10 +49,11 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public static OI mInstance;
+  public static OI mInstance = null;
 
   Joystick mDriverJoystick, mOperatorJoystick;
   Button mDriverButtonA, mDriverButtonB, mDriverButtonX, mDriverButtonY, mDriverButtonLB, mDriverButtonRB;
+  Button mOperatorButtonA, mOperatorButtonB, mOperatorButtonX, mOperatorButtonY, mOperatorButtonLB, mOperatorButtonRB;
 
   Drivebase mDrivebase = Drivebase.getInstance();
 
@@ -67,9 +72,19 @@ public class OI {
   public OI() {
     mDriverJoystick = new Joystick(RobotMap.DRIVER_CONTROLLER_PORT);
     mOperatorJoystick = new Joystick(RobotMap.OPERATOR_CONTROLLER_PORT);
-    System.out.println("OI Created");
+    
     mDriverButtonA = new JoystickButton(mDriverJoystick, RobotMap.XBOX_BUTTON_A_PORT);
     mDriverButtonRB = new JoystickButton(mDriverJoystick, RobotMap.XBOX_BUTTON_RB_PORT);
+    mDriverButtonLB = new JoystickButton(mDriverJoystick, RobotMap.XBOX_BUTTON_LB_PORT);
+
+    mOperatorButtonRB = new JoystickButton(mOperatorJoystick, RobotMap.XBOX_BUTTON_RB_PORT);
+    mOperatorButtonLB = new JoystickButton(mOperatorJoystick, RobotMap.XBOX_BUTTON_LB_PORT);
+
+    mDriverButtonLB.whenPressed(new DriveArcadeMode());
+    mDriverButtonRB.whenPressed(new DriveTankMode());
+
+    mOperatorButtonLB.whileHeld(new RunIntake());
+    mOperatorButtonRB.whileHeld(new ReverseIntake());
 
   }
 
@@ -78,8 +93,6 @@ public class OI {
     mDriverLeftStickY = mDriverJoystick.getRawAxis(RobotMap.XBOX_LEFT_STICK_AXIS_Y);
     mDriverRightStickX = mDriverJoystick.getRawAxis(RobotMap.XBOX_RIGHT_STICK_AXIS_X);
     mDriverRightStickY = mDriverJoystick.getRawAxis(RobotMap.XBOX_RIGHT_STICK_AXIS_Y);
-
-    
 
     mDriverLeftStickX *= RobotMap.STICK_DAMPEN_PERCENTAGE;
     mDriverLeftStickY *= RobotMap.STICK_DAMPEN_PERCENTAGE;

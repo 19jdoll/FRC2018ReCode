@@ -32,6 +32,12 @@ public class RobotMap {
   public static final int RIGHT_DRIVE_MOTOR_2 = 4;
   public static final int RIGHT_DRIVE_MOTOR_3 = 5;
 
+  public static final int LEFT_INTAKE_CAN_PORT = 4;
+  public static final int RIGHT_INTAKE_CAN_PORT = 5;
+
+  public static final double INTAKE_SPEED = 0.7;
+  public static final int INTAKE_LIMIT_SWITCH_PORT = 5;
+
   public static final int DRIVER_CONTROLLER_PORT = 0;
   public static final int OPERATOR_CONTROLLER_PORT = 1;
 
@@ -49,5 +55,5 @@ public class RobotMap {
   public static final int XBOX_RIGHT_STICK_AXIS_X = 4;
   public static final int XBOX_RIGHT_STICK_AXIS_Y = 5;
 
-  public static final double STICK_DAMPEN_PERCENTAGE = .50;
+  public static final double STICK_DAMPEN_PERCENTAGE = 0.50;
 }

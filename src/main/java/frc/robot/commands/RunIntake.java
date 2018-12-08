@@ -8,31 +8,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
-import frc.robot.subsystems.Drivebase;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.Intake;
 
-public class DriveTankMode extends Command {
+public class RunIntake extends Command {
 
-  private Drivebase mDrivebase = Drivebase.getInstance();
-    OI mOI;
-  public DriveTankMode() {
+  Intake mIntake = Intake.getInstance();
+
+  public RunIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(mDrivebase);
+
+    requires(mIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    mOI = OI.getInstance();
-    System.out.println("Tank Mode: Initialize");
+    System.out.println("RunIntake: Initialize");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    mDrivebase.setSpeed(mOI.mDriverLeftStickY, mOI.mDriverRightStickY);
-    System.out.println("Tank Mode: Execute");
+    mIntake.setSpeed(RobotMap.INTAKE_SPEED);
+    System.out.println("RunIntake: Execute");
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,14 +44,14 @@ public class DriveTankMode extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    System.out.println("Tank Mode: End");
+    System.out.println("RunIntake: End");
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    mDrivebase.setSpeed(0.0, 0.0);
-    System.out.println("Tank Mode: Interrupted");
+    mIntake.setSpeed(0.0);
+    System.out.println("RunIntake: Interrupted");
   }
 }
